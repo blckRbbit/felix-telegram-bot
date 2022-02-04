@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>admin</title>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <h4>Админка. Идеи</h4>
+        <br>
+        <div class="row">
+            <div class="form-wrapper col col-lg-2">
+                <h6>Фильтрация идей:</h6>
+                <br>
+                <form  method="post" class="filter-form filter-idea-form">
+                    <input class="form-control" name="kind_of_idea" type="text" placeholder="тип идеи">
+                    <br>
+                    <input class="form-control" name="user_id" type="number" placeholder="id юзера" min="1" max="100000000">
+                    <br>
+                    <input class="form-control" name="idea_id" type="number" placeholder="id идеи"
+                           min="0" max="10000">
+                    <br>
+                    <input class="form-control" name="estimated_costs" type="number" placeholder="макс. затраты"
+                           min="0" max="1000000">
+                    <br>
+                    <button type="submit" class="search-btn btn btn-primary">Найти</button>
+                </form>
+                <br>
+                <a class="search-btn btn btn-primary users__link" th:href="@{/users}" style="color: #FFF;">Пользователи</a>
+                <p></p>
+                <a class="search-btn btn btn-success" th:href="@{/admin/create}" style="color: #FFF;">Добавить админа</a>
+                <p></p>
+                <a class="search-btn btn btn-danger" th:href="@{/admin/delete}" style="color: #FFF;">Удалить админа</a>
+                <br>
+            </div>
+            <div class="col col-lg-9 col-ideas">
+                <table class="resp-tab">
+                    <thead>
+                        <tr>
+                            <th>действие</th>
+                            <th>id<br>идеи</th>
+                            <th>id<br>юзера</th>
+                            <th>название идеи</th>
+                            <th>тип идеи</th>
+                            <th>затраты</th>
+                            <th>экономич.<br>эффект</th>
+                            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;описание&nbsp;идеи&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th>доп.<br>информация</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="i:${ideasPage.content}">
+                            <td>
+                                <form th:action="'idea/' + ${i.id} + '/remove'" method="post">
+                                    <button type="submit" class="btn btn-danger">Удалить</button>
+                                </form>
+                            </td>
+                            <td th:text="${i.id}"></td>
+                            <td th:text="${i.user.id}"></td>
+                            <td th:text="${i.ideaTitle}"></td>
+                            <td th:text="${i.kindOfIdea}"></td>
+                            <td th:text="${i.estimatedCosts}"></td>
+                            <td th:text="${i.estimatedEconomicEffect}"></td>
+                            <td th:text="${i.idea}"></td>
+                            <td th:text="${i.additionally}"></td>
+                        </tr>              
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <br>
+        <br>
+        <nav class="row pages">
+            <strong>Странца: </strong>
+            <div class="pagination" th:if="${ideasPage.totalPages >= 0}" th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/admin(size=${ideasPage.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==ideasPage.number + 1} ? active"></a>
+            </div>
+        </nav>
+    </div>
+</body>
+<style>
+    body {font-size: 8px;}
+    .btn {font-size: 12px;}
+    input::-webkit-input-placeholder {font-size:10px;}
+    .pages {
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    .pages strong {
+        margin-right: 10px;
+    }
+
+    .pages a {
+        margin: 0px 5px;
+        color: black;
+        font-weight: bold;
+    }
+
+    .pages .active {
+        color: #007bff;
+    }
+    .resp-tab {
+    border-radius: 5px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    /* width: 100%; */
+    max-width: 100%;
+}
+.resp-tab th, .resp-tab td {
+    padding: 10px 20px;
+    font-size: 13px;
+    border: none;
+    font-family: Verdana, sans-serif;   
+    border: 1px solid #337AB7;
+    vertical-align: top;
+}
+.resp-tab th {
+    color: #FFF;
+    background: #337AB7;
+    font-weight: bold;
+    border: 1px solid #1a4a73;   
+    text-transform: uppercase;   
+    text-align: center;   
+}
+.resp-tab tr:nth-child(even) {
+    background: #edf7ff;
+}
+.resp-tab td span {
+    background: #337AB7;
+    color: #FFF;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: Verdana, sans-serif;   
+    text-transform: uppercase;       
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+    left: 0;   
+}
+@media(max-width: 768px) {
+    .resp-tab thead {
+        display: none;
+    }
+    .resp-tab tr {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+    .resp-tab td {
+        margin: 0 -1px -1px 0;
+        padding-top: 35px;
+        position: relative;
+        width: 50%;
+    }
+    .resp-tab td span {
+        display: block;
+    }
+}
+@media(max-width: 480px) {
+    .resp-tab td {
+        width: 100%;
+    }
+}
+</style>
+</html>

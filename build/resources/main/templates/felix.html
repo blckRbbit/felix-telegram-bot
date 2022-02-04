@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newidea</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Есть идея!</h3>
+        <form id="send-idea-form" action="/api/v1/idea/{id}" method="POST">
+
+          <div class="row">
+            <div class="col-25">
+              <label for="fname">Имя</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="fname" name="firstName" placeholder="Ваше имя" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="lname">Фамилия</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="lname" name="lastName" placeholder="Ваша фамилия" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="institution">Организация</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="institution" name="institution" placeholder="Организация">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="position">Должность</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="position" name="position" placeholder="Ваша должность">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="phoneNumber">Телефон</label>
+            </div>
+            <div class="col-75">
+              <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Контактный телефон (без 8)" pattern="[0-9]{10}" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="email">Email</label>
+            </div>
+            <div class="col-75">
+              <input type="email" id="email" name="email" placeholder="Email" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="ideaTitle">Заголовок идеи</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="ideaTitle" name="ideaTitle" placeholder="Заголовок идеи">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="type-of-idea">Тип идеи</label>
+            </div>
+            <div class="col-75">
+              <select id="type-of-idea" name="kindOfIdea">
+                <option value="техническая">Техническая</option>
+                <option value="организационная">Организационная</option>
+                <option value="охрана труда">Охрана труда</option>
+                <option value="бытовая">Бытовая</option>
+                <option value="малое улучшение рабочего места">Малое улучшение рабочего места</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="estimatedCosts">Предполагаемые затраты</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="estimatedCosts" name="estimatedCosts" placeholder="Предполагаемые затраты" 
+              min="0" max="1000000000" value="0">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="estimatedEconomicEffect">Предполагаемый<br>экономический эффект</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="estimatedEconomicEffect" name="estimatedEconomicEffect" placeholder="Экономический эффект" 
+              min="0" max="1000000000" value="0">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="idea">Описание идеи</label>
+            </div>
+            <div class="col-75">
+              <textarea  form="send-idea-form" id="idea" name="idea" placeholder="Опишите Вашу идею" 
+              style="height:200px" maxlength="10000000000000000000000" cols="70" rows="8" required spellcheck="true"></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="additionally">Дополнительная информация</label>
+            </div>
+            <div class="col-75">
+              <textarea  form="send-idea-form" id="additionally" name="additionally" placeholder="Дополнительная информация(соавторы, пожелания)" 
+              style="height:200px" maxlength="1000" cols="70" rows="8"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <input type="submit" value="Подать идею!">
+          </div>
+
+        </form>
+      </div>
+</body>
+<style>
+    input[type=text], select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Style the label to display next to the inputs */
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+/* Style the container */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Floating column for labels: 25% width */
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</html>

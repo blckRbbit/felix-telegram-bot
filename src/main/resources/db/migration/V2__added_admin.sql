@@ -1,0 +1,1 @@
+INSERT INTO `felixTGK_DB`.`admin` (`telegram_name`, `password`) VALUES ('fersival', '1');

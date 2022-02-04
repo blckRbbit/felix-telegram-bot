@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "telegrambot",
+      "type": "com.blck_rbbit.felix.appconfig.BotConfig",
+      "sourceType": "com.blck_rbbit.felix.appconfig.BotConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "telegrambot.bot-token",
+      "type": "java.lang.String",
+      "sourceType": "com.blck_rbbit.felix.appconfig.BotConfig"
+    },
+    {
+      "name": "telegrambot.bot-user-name",
+      "type": "java.lang.String",
+      "sourceType": "com.blck_rbbit.felix.appconfig.BotConfig"
+    },
+    {
+      "name": "telegrambot.proxy-host",
+      "type": "java.lang.String",
+      "sourceType": "com.blck_rbbit.felix.appconfig.BotConfig"
+    },
+    {
+      "name": "telegrambot.proxy-port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.blck_rbbit.felix.appconfig.BotConfig"
+    },
+    {
+      "name": "telegrambot.proxy-type",
+      "type": "org.telegram.telegrambots.bots.DefaultBotOptions$ProxyType",
+      "sourceType": "com.blck_rbbit.felix.appconfig.BotConfig"
+    },
+    {
+      "name": "telegrambot.web-hook-path",
+      "type": "java.lang.String",
+      "sourceType": "com.blck_rbbit.felix.appconfig.BotConfig"
+    }
+  ],
+  "hints": []
+}
